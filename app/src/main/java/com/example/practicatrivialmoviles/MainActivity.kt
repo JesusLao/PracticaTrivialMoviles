@@ -1,5 +1,6 @@
 package com.example.practicatrivialmoviles
 
+import android.content.Context
 import android.content.res.Configuration
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -15,7 +16,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
@@ -32,13 +32,18 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.practicatrivialmoviles.ui.theme.AppTheme
+import org.json.JSONArray
+import org.json.JSONObject
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
+import android.content.res.Resources
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -51,9 +56,22 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
+data class Pregunta(
+    val pregunta: String,
+    val opciones: List<String>,
+    val opcion_correcta: String
+)
 
 @Composable
 fun MyApp() {
+    var arrQuestions = mutableListOf<String>()
+    var arrAnswers = mutableListOf<List<String>>()
+
+    /*val context = LocalContext.current // Necesitas obtener el contexto actual.
+
+    val jsonData = context.resources.openRawResource(context.resources.getIdentifier("pre","raw", context.packageName)).bufferedReader().use { it.readText() }
+    val outputJsonString=JSONObject(jsonData)*/
+
     Surface(
         modifier = Modifier.fillMaxSize(),
         tonalElevation = 5.dp,
@@ -64,21 +82,56 @@ fun MyApp() {
         if (shouldShowOnboarding) {
             OnboardingScreen(onContinueClicked = { shouldShowOnboarding = false })
         } else {
-            val questions = listOf(
-                "What is 2 + 2?",
-                "What is the capital of France?",
-                "What is the largest planet in the solar system?"
-            )
+            /*val questions = outputJsonString.getJSONArray("preguntas") as JSONArray
 
-            val answers = listOf(
-                listOf("3", "4", "5", "6"),
-                listOf("London", "Berlin", "Paris", "Madrid"),
-                listOf("Earth", "Mars", "Jupiter", "Saturn")
-            )
-            Quiz(questions, answers)
+            for (i in 0 until questions.length()){
+                val question = questions.getJSONObject(i).getString("pregunta")
+                arrQuestions.add(question)
+
+
+
+            }*/
+            val gson = Gson()
+            //val listType = object : TypeToken<List<List<String>>>() {}.type
+            val preguntas: List<Pregunta> = gson.fromJson(LocalContext.current.resources.openRawResource(R.raw.preguntas).bufferedReader().use { it.readText() }, object : TypeToken<List<Pregunta>>() {}.type)
+
+
+            Quiz(preguntas)
         }
     }
 }
+
+fun loadPreguntasFromJson(context: Context, fileName: String): List<Pregunta> {
+    val json: String = try {
+        val resourceId = context.resources.getIdentifier(fileName, "raw", context.packageName)
+        val jsonStream = context.resources.openRawResource(resourceId)
+        jsonStream.bufferedReader().use { it.readText() }
+    } catch (e: Resources.NotFoundException) {
+        ""
+    }
+
+    return if (json.isNotEmpty()) {
+        val gson = Gson()
+        val preguntaList: List<Pregunta> = gson.fromJson(json, Array<Pregunta>::class.java).toList()
+        preguntaList
+    } else {
+        emptyList()
+    }
+}
+
+
+/*private fun readJSONFromResource(context: Context, resourceId: Int): String {
+    val inputStream: InputStream = context.assets.open("raw/pre.json")
+    val reader = BufferedReader(InputStreamReader(inputStream))
+    val sb = StringBuilder()
+    var line: String? = reader.readLine()
+    while (line != null) {
+        sb.append(line).append('\n')
+        line = reader.readLine()
+    }
+    reader.close()
+    return sb.toString()
+}*/
 
 @Composable
 fun OnboardingScreen(onContinueClicked: () -> Unit) {
@@ -99,7 +152,7 @@ fun OnboardingScreen(onContinueClicked: () -> Unit) {
 }
 
 @Composable
-fun Quiz(questions: List<String>, answers: List<List<String>>) {
+fun Quiz(preguntas: List<Pregunta>) {
     var currentQuestionIndex by remember { mutableIntStateOf(0) }
     var selectedAnswer by remember { mutableIntStateOf(-1) }
 
@@ -112,7 +165,7 @@ fun Quiz(questions: List<String>, answers: List<List<String>>) {
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Text(
-            text = questions[currentQuestionIndex],
+            text = preguntas[currentQuestionIndex].pregunta,
             style = MaterialTheme.typography.titleLarge,
             fontSize = 24.sp,
             modifier = Modifier.padding(16.dp)
@@ -123,7 +176,7 @@ fun Quiz(questions: List<String>, answers: List<List<String>>) {
                 .fillMaxWidth()
                 .padding(40.dp)
         ) {
-            itemsIndexed(answers[currentQuestionIndex]) { index, answer ->
+            itemsIndexed(preguntas[currentQuestionIndex].opciones) { index, answer ->
                 AnswerCard(
                     answer = answer,
                     isSelected = index == selectedAnswer,
@@ -139,7 +192,7 @@ fun Quiz(questions: List<String>, answers: List<List<String>>) {
         Button(
             onClick = {
                 if (selectedAnswer >= 0) {
-                    if (currentQuestionIndex < questions.size - 1) {
+                    if (currentQuestionIndex < preguntas.size - 1) {
                         currentQuestionIndex++
                         selectedAnswer = -1
                     } else {
@@ -195,7 +248,7 @@ fun AnswerCard(answer: String, isSelected: Boolean, onAnswerSelected: () -> Unit
 @Composable
 fun GreetingPreview() {
     AppTheme {
-        val questions = listOf(
+        /*val questions = listOf(
             "What is 2 + 2?",
             "What is the capital of France?",
             "What is the largest planet in the solar system?"
@@ -207,6 +260,6 @@ fun GreetingPreview() {
             listOf("Earth", "Mars", "Jupiter", "Saturn")
         )
 
-        Quiz(questions, answers)
+        Quiz(questions, answers)*/
     }
 }

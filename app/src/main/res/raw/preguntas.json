@@ -1,0 +1,82 @@
+[
+  {
+    "pregunta": "¿Cuál se usa para resolver determinantes?",
+    "opciones": ["Teorema de Rouché-Frobenius", "Regla de Sarrus", "Regla de Ruffini", "Teorema de Ruchi"],
+    "opcion_correcta": "Regla de Sarrus"
+  },
+  {
+    "pregunta": "¿Cuáles son los elementos más comunes para la fisión nuclear?",
+    "opciones": ["Platino y plomo", "Radio y plomo", "Radio y plutonio", "Uranio y plutonio"],
+    "opcion_correcta": "Uranio y plutonio"
+  },
+  {
+    "pregunta": "¿Qué compuesto químico se utiliza para la detección de sangre en investigaciones?",
+    "opciones": ["Fenantreno", "Dióxido de titanio", "Nitrato de plata", "Luminol"],
+    "opcion_correcta": "Luminol"
+  },
+  {
+    "pregunta": "¿Qué término se utiliza en astronomía para denominar un cometa que pasa cerca del Sol en una órbita elíptica y que puede aparecer en el cielo nocturno durante varias semanas?",
+    "opciones": ["Asterismo", "Quásar", "Cúmulo", "Cometa"],
+    "opcion_correcta": "Cometa"
+  },
+  {
+    "pregunta": "¿Cuál es el elemento más denso conocido?",
+    "opciones": ["Osmio", "Plomo", "Níquel", "Uranio"],
+    "opcion_correcta": "Osmio"
+  },
+  {
+    "pregunta": "¿Quién fue el encargado de la defensa de Cartagena de Indias en 1741?",
+    "opciones": ["Alfonso Pizarro", "Bernardo de Gálvez", "Blas de Lezo", "José de Escandón"],
+    "opcion_correcta": "Blas de Lezo"
+  },
+  {
+    "pregunta": "¿Quién escribió la obra literaria 'Cien años de soledad'?",
+    "opciones": ["Mario Vargas Llosa", "Gabriel García Márquez", "Pablo Neruda", "Julio Cortázar"],
+    "opcion_correcta": "Gabriel García Márquez"
+  },
+  {
+    "pregunta": "¿En qué año se fundó la Organización de las Naciones Unidas (ONU)?",
+    "opciones": ["1945", "1932", "1955", "1960"],
+    "opcion_correcta": "1945"
+  },
+  {
+    "pregunta": "¿Cuál es la pintura más famosa de Leonardo da Vinci que se exhibe en el Museo del Louvre en París?",
+    "opciones": ["La última cena", "La noche estrellada", "La Gioconda", "La creación de Adán"],
+    "opcion_correcta": "La Gioconda"
+  },
+  {
+    "pregunta": "¿Cuál es el elemento químico más abundante en la Tierra?",
+    "opciones": ["Hierro", "Oxígeno", "Silicio", "Carbono"],
+    "opcion_correcta": "Oxígeno"
+  },
+  {
+    "pregunta": "¿Quién fue el autor de 'El origen de las especies' y desarrolló la teoría de la evolución por selección natural?",
+    "opciones": ["Isaac Newton", "Charles Darwin", "Albert Einstein", "Gregor Mendel"],
+    "opcion_correcta": "Charles Darwin"
+  },
+  {
+    "pregunta": "¿Cuál es el río más largo del mundo?",
+    "opciones": ["Río Amazonas", "Río Nilo", "Río Yangtsé", "Río Misisipi"],
+    "opcion_correcta": "Río Amazonas"
+  },
+  {
+    "pregunta": "¿Cuál es el compuesto químico responsable del agujero de ozono en la atmósfera?",
+    "opciones": ["Dióxido de carbono (CO2)", "Óxido de nitrógeno (NO2)", "Clorofluorocarbonos (CFC)", "Metano (CH4)"],
+    "opcion_correcta": "Clorofluorocarbonos (CFC)"
+  },
+  {
+    "pregunta": "¿En qué año se llevó a cabo la Revolución Rusa, que condujo al derrocamiento del régimen zarista?",
+    "opciones": ["1905", "1917", "1923", "1930"],
+    "opcion_correcta": "1917"
+  },
+  {
+    "pregunta": "¿Cuál es la novena letra del alfabeto griego?",
+    "opciones": ["Beta", "Delta", "Theta", "Iota"],
+    "opcion_correcta": "Iota"
+  },
+  {
+    "pregunta": "¿Qué tipo de munición usa el fusil soviético AK-47?",
+    "opciones": ["5.56x45mm", "7.62x39mm", ".45ACP", "6.5mm"],
+    "opcion_correcta": "7.62x39mm"
+  }
+]
