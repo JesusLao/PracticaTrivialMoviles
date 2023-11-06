@@ -5,16 +5,19 @@ import android.content.res.Configuration
 import android.content.res.Resources
 import android.graphics.drawable.shapes.Shape
 import android.media.Image
+import android.media.MediaPlayer
 import android.net.Uri
 import android.os.Bundle
 import android.view.ViewGroup
 import android.webkit.WebView
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -41,6 +44,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
@@ -60,6 +64,7 @@ import com.google.gson.reflect.TypeToken
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        getWindow().setBackgroundDrawableResource(R.drawable.ten_in_a_row_);
         setContent {
             AppTheme {
                 // A surface container using the 'background' color from the theme
@@ -74,7 +79,6 @@ data class Pregunta(
     val opciones: List<String>,
     val opcion_correcta: String,
     var imagen: Int?, // ID de recurso de imagen
-    var videoUrl: String? // URL del video
 )
 
 @Composable
@@ -92,20 +96,28 @@ fun MyApp() {
         tonalElevation = 5.dp,
         color = MaterialTheme.colorScheme.background
     ) {
+
         var shouldShowOnboarding by rememberSaveable { mutableStateOf(true) }
 
+
+
         if (shouldShowOnboarding) {
-            OnboardingScreen(onContinueClicked = { shouldShowOnboarding = false })
+            /*val mediaPlayer = MediaPlayer.create(LocalContext.current, R.raw.kobosil_avernian)
+            mediaPlayer.start()*/
+            OnboardingScreen(onContinueClicked = { shouldShowOnboarding = false
+                })
         } else {
             val gson = Gson()
             val preguntas: List<Pregunta> = gson.fromJson(
                 LocalContext.current.resources.openRawResource(R.raw.preguntas).bufferedReader()
                     .use { it.readText() }, object : TypeToken<List<Pregunta>>() {}.type
             )
-            preguntas[0].imagen=R.drawable.edt
-            preguntas[1].videoUrl="https://www.youtube.com/watch?v=Ul8Xz3_r0Eg"
+            preguntas[32].imagen=R.drawable.q2
+            preguntas[33].imagen=R.drawable.image
+            preguntas[34].imagen=R.drawable.mapa1
 
-            Quiz(preguntas)
+
+            Quiz(preguntas.shuffled())
         }
     }
 }
@@ -113,35 +125,87 @@ fun MyApp() {
 @Composable
 fun OnboardingScreen(onContinueClicked: () -> Unit) {
 
+
+    Box(modifier = Modifier.fillMaxSize()){
+        Image(
+            painter = painterResource(R.drawable.inicio_ten_in_a_row),
+            contentDescription = "Imagen de la pregunta",
+            contentScale = ContentScale.FillBounds,
+            modifier = Modifier
+                .matchParentSize()
+        )
+    }
+
+
+
+
+
     Column(
-        modifier = Modifier.fillMaxSize(),
-        verticalArrangement = Arrangement.Center,
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(vertical = 90.dp),
+        verticalArrangement = Arrangement.Bottom,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text("Welcome to this Quiz!", style = MaterialTheme.typography.titleLarge)
-        Button(
-            modifier = Modifier.padding(vertical = 24.dp),
-            onClick = onContinueClicked
+
+        //Text("Welcome to this Quiz!", style = MaterialTheme.typography.titleLarge)
+        Card(
+            modifier = Modifier.padding(8.dp), // Añade un margen alrededor del botón
+            border = BorderStroke(3.dp, MaterialTheme.colorScheme.primary)
         ) {
-            Text("Continue", style = MaterialTheme.typography.labelMedium)
+            Button(
+                onClick =  onContinueClicked  , colors = ButtonDefaults.buttonColors(
+                    containerColor = MaterialTheme.colorScheme.tertiaryContainer,
+                    contentColor = MaterialTheme.colorScheme.onPrimaryContainer,
+                    disabledContainerColor = MaterialTheme.colorScheme.inversePrimary,
+                    disabledContentColor = MaterialTheme.colorScheme.inversePrimary
+                )
+            ) {
+                Text("Comienza el trivial!", style = MaterialTheme.typography.labelMedium)
+
+            }
         }
     }
+
 }
+
+
 
 @Composable
 fun OnWinScreen(onContinueClicked: () -> Unit) {
 
+    Box(modifier = Modifier.fillMaxSize()){
+        Image(
+            painter = painterResource(R.drawable.victoria_ten_in_a_row),
+            contentDescription = "Imagen de la pregunta",
+            contentScale = ContentScale.FillBounds,
+            modifier = Modifier
+                .matchParentSize()
+        )
+    }
+
     Column(
-        modifier = Modifier.fillMaxSize(),
-        verticalArrangement = Arrangement.Center,
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(vertical = 90.dp),
+        verticalArrangement = Arrangement.Bottom,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text("Has Ganado", style = MaterialTheme.typography.titleLarge)
-        Button(
-            modifier = Modifier.padding(vertical = 24.dp),
-            onClick = onContinueClicked
+        Card(
+            modifier = Modifier.padding(8.dp), // Añade un margen alrededor del botón
+            border = BorderStroke(3.dp, MaterialTheme.colorScheme.primary)
         ) {
-            Text("Continue", style = MaterialTheme.typography.labelMedium)
+            Button(
+                onClick = onContinueClicked, colors = ButtonDefaults.buttonColors(
+                    containerColor = MaterialTheme.colorScheme.tertiaryContainer,
+                    contentColor = MaterialTheme.colorScheme.onPrimaryContainer,
+                    disabledContainerColor = MaterialTheme.colorScheme.inversePrimary,
+                    disabledContentColor = MaterialTheme.colorScheme.inversePrimary
+                )
+            ) {
+                Text("Échate otra", style = MaterialTheme.typography.labelMedium)
+
+            }
         }
     }
 }
@@ -149,24 +213,40 @@ fun OnWinScreen(onContinueClicked: () -> Unit) {
 @Composable
 fun OnLoseScreen(onContinueClicked: () -> Unit/*, onReturnToOnboarding: () -> Unit*/) {
 
+    Box(modifier = Modifier.fillMaxSize()){
+        Image(
+            painter = painterResource(R.drawable.derrota_ten_in_a_row),
+            contentDescription = "Imagen de la pregunta",
+            contentScale = ContentScale.FillBounds,
+            modifier = Modifier
+                .matchParentSize()
+        )
+    }
+
     Column(
-        modifier = Modifier.fillMaxSize(),
-        verticalArrangement = Arrangement.Center,
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(vertical = 90.dp),
+        verticalArrangement = Arrangement.Bottom,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text("Has Perdido", style = MaterialTheme.typography.titleLarge)
-        Button(
-            modifier = Modifier.padding(vertical = 24.dp),
-            onClick = onContinueClicked
-        ) {
-            Text("Continue", style = MaterialTheme.typography.labelMedium)
+        Card(
+            modifier = Modifier.padding(8.dp), // Añade un margen alrededor del botón
+            border = BorderStroke(3.dp, MaterialTheme.colorScheme.primary)
+        )
+        {
+            Button(
+                onClick = onContinueClicked, colors = ButtonDefaults.buttonColors(
+                    containerColor = MaterialTheme.colorScheme.tertiaryContainer,
+                    contentColor = MaterialTheme.colorScheme.onPrimaryContainer,
+                    disabledContainerColor = MaterialTheme.colorScheme.inversePrimary,
+                    disabledContentColor = MaterialTheme.colorScheme.inversePrimary
+                )
+            ) {
+                Text("Vuelve a intentarlo", style = MaterialTheme.typography.labelMedium)
+
+            }
         }
-        /*Button(
-            modifier = Modifier.padding(vertical = 12.dp),
-            onClick = onReturnToOnboarding
-        ) {
-            Text("Return to Onboarding", style = MaterialTheme.typography.labelMedium)
-        }*/
     }
 }
 
@@ -177,19 +257,23 @@ fun Quiz(preguntas: List<Pregunta>) {
     var quizCompleted by remember { mutableStateOf(false) }
     var quizFailed by remember { mutableStateOf(false) }
 
+
+
     fun nextQuestion() {
         if (selectedAnswer >= 0) {
             if (preguntas[currentQuestionIndex].opciones[selectedAnswer] == preguntas[currentQuestionIndex].opcion_correcta) {
-                if (currentQuestionIndex < preguntas.size - 1) {
+                if (currentQuestionIndex < 10) {
                     currentQuestionIndex++
                     selectedAnswer = -1
                 } else {
                     // Quiz completado
                     quizCompleted = true
+
                 }
             } else {
                 // Respuesta incorrecta, ir a la pantalla de pérdida
                 quizFailed = true
+
             }
         }
     }
@@ -216,10 +300,16 @@ fun Quiz(preguntas: List<Pregunta>) {
 
         }*/)
     }else {
+        Box(modifier = Modifier.fillMaxSize()){
+            Image(
+                painter = painterResource(R.drawable.pantalla_pregunta),
+                contentDescription = "Imagen de la pregunta",
+                contentScale = ContentScale.FillBounds,
+                modifier = Modifier
+                    .matchParentSize()
+            )
+        }
         Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .background(MaterialTheme.colorScheme.onPrimary, MaterialTheme.shapes.extraLarge),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
@@ -276,7 +366,6 @@ fun Quiz(preguntas: List<Pregunta>) {
             LazyColumn(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .background(MaterialTheme.colorScheme.onPrimary, MaterialTheme.shapes.extraLarge)
                     .padding(40.dp)
             ) {
                 itemsIndexed(preguntas[currentQuestionIndex].opciones) { index, answer ->
@@ -291,6 +380,10 @@ fun Quiz(preguntas: List<Pregunta>) {
             }
 
             Spacer(modifier = Modifier.height(16.dp))
+
+
+
+
 
             Button(
                 onClick = {
@@ -307,7 +400,7 @@ fun Quiz(preguntas: List<Pregunta>) {
                     disabledContentColor = MaterialTheme.colorScheme.inversePrimary
                 ),
             ) {
-                Text(text = "Next Question", style = MaterialTheme.typography.labelMedium)
+                Text(text = "Siguiente pregunta", style = MaterialTheme.typography.labelMedium)
             }
         }
     }

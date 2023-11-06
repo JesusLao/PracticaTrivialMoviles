@@ -78,5 +78,104 @@
     "pregunta": "¿Qué tipo de munición usa el fusil soviético AK-47?",
     "opciones": ["5.56x45mm", "7.62x39mm", ".45ACP", "6.5mm"],
     "opcion_correcta": "7.62x39mm"
+  },{
+  "pregunta": "¿Cómo se llama el hombre que salvó a Nintendo de una demanda por derechos de autor en 1980?",
+  "opciones": ["Jack Kirby", "James Kirby", "Jake Kirby", "John Kirby"],
+  "opcion_correcta": "John Kirby"
+},
+  {
+    "pregunta": "¿Cómo se representa el número 3044 en números romanos?",
+    "opciones": ["MMMLX", "MMMXLIV", "MMMLXIV", "MMMDLV"],
+    "opcion_correcta": "MMMXLIV"
+  },
+  {
+    "pregunta": "¿Cómo se llaman los tres barcos que llevó Colón en el descubrimiento de América?",
+    "opciones": ["Pinta, Santa María y Niña", "Maricarmen, Pinta y María", "Santa Niña, María y Cinta", "Pinta, Niña y Santa Fe"],
+    "opcion_correcta": "Pinta, Santa María y Niña"
+  },
+  {
+    "pregunta": "¿Qué videojuego se lanzó el mismo día que Animal Crossing: New Horizons?",
+    "opciones": ["DOOM", "DOOM 3", "DOOM Eternal", "DOOM Ressurrection"],
+    "opcion_correcta": "DOOM Eternal"
+  },
+  {
+    "pregunta": "¿Quiénes provocaron la caída de Constantinopla?",
+    "opciones": ["Los turcos otomanos", "El imperio romano de Oriente", "El imperio romano de Occidente", "Imperio Mameluco"],
+    "opcion_correcta": "Los turcos otomanos"
+  },
+  {
+    "pregunta": "Si en una brújula encontramos las indicaciones NE ¿A qué punto cardinal se refieren ?",
+    "opciones": ["Norte", "Surnorte", "Noroeste", "Noreste"],
+    "opcion_correcta": "Noreste"
+  },
+  {
+    "pregunta": "¿Cómo se conoce a la incapacidad para ver el color azul?",
+    "opciones": ["protanopía", "tritanopía", "petronopía", "deuteranopía"],
+    "opcion_correcta": "deuteranopía"
+  },
+  {
+    "pregunta": "¿Cuál es el tamaño mínimo recomendado de un pen drive necesario para crear un medio de instalación de Windows 11?",
+    "opciones": ["10GB", "6GB", "8GB", "12GB"],
+    "opcion_correcta": "8GB"
+  },
+  {
+    "pregunta": "¿Cuál de los siguientes es uno de los detectores generales principales del gran acelerador de hadrones (LHC) del CERN?",
+    "opciones": ["ATLAS", "ISOLDE", "LEIR", "n_TOF"],
+    "opcion_correcta": "ATLAS"
+  },
+  {
+    "pregunta": "¿En qué año se llevó a cabo la independencia de los Estados Unidos?",
+    "opciones": ["1776", "1789", "1812", "1865"],
+    "opcion_correcta": "1776"
+  },
+  {
+    "pregunta": "¿Cuál es el metal más abundante en la corteza terrestre?",
+    "opciones": ["Oro", "Plata", "Hierro", "Aluminio"],
+    "opcion_correcta": "Aluminio"
+  },
+  {
+    "pregunta": "¿Cuál es el símbolo químico del oro?",
+    "opciones": ["Ag", "Au", "Fe", "Hg"],
+    "opcion_correcta": "Au"
+  },
+  {
+    "pregunta": "¿Cuál es la fórmula química del ácido sulfúrico?",
+    "opciones": ["H2SO4", "HCl", "HNO3", "CH4"],
+    "opcion_correcta": "H2SO4"
+  },
+  {
+    "pregunta": "¿Cuál es el valor aproximado de la constante 'e'?",
+    "opciones": ["3.14159", "2.71828", "1.61803", "0.57721"],
+    "opcion_correcta": "2.71828"
+  },
+  {
+    "pregunta": "¿Cuál es el punto de congelación del agua en grados Fahrenheit?",
+    "opciones": ["32°F", "0°F", "100°F", "212°F"],
+    "opcion_correcta": "32°F"
+  },
+  {
+    "pregunta": "¿Qué científico desarrolló la teoría de la relatividad especial?",
+    "opciones": ["Isaac Newton", "Albert Einstein", "Galileo Galilei", "Niels Bohr"],
+    "opcion_correcta": "Albert Einstein"
+  },
+  {
+    "pregunta": "¿Qué es la siguiente imagen?",
+    "opciones": ["GPU", "CPU", "RAM", "Disco Duro"],
+    "opcion_correcta": "GPU"
+  },
+  {
+    "pregunta": "¿A qué elemento pertenece la siguiente formulación orgánica?",
+    "opciones": ["Oxociclohexanocarbonitrilo", "Bencenocarbonitrilo", "Etanodinitrilo", "Bencenohidronitrilo"],
+    "opcion_correcta": "Bencenocarbonitrilo"
+  },{
+  "pregunta": "¿Cómo se llama el siguiente sistema montañoso?",
+  "opciones": ["Alpes Dináricos", "cordillera del Cáucaso", "Cárpatos", "Sierra Nevada"],
+  "opcion_correcta": "Cárpatos"
+},
+
+  {
+    "pregunta": "¿Qué célebre director de cine dirigió “La naranja Mecánica”?",
+    "opciones": ["Ridley Scott", "David Lynch", "Stanley Kubrick", "Darren Aronofsky"],
+    "opcion_correcta": "Stanley Kubrick"
   }
 ]
